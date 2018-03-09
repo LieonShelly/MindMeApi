@@ -21,5 +21,5 @@ try config.setup()
 
 let drop = try Droplet(config)
 try drop.setup()
-
+let postgresqlDriver = try drop.postgresql()
 try drop.run()
