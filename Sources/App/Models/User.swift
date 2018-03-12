@@ -9,6 +9,7 @@ import Foundation
 import FluentProvider
 import HTTP
 import Node
+import Crypto
 
 final class User: Model, NodeInitializable{
     var storage: Storage = Storage()

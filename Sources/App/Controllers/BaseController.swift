@@ -9,6 +9,8 @@ import Vapor
 import Node
 import PostgreSQLProvider
 import PostgreSQLDriver
+import ValidationProvider
+import VaporValidation
 
 final class BaseController {
     func adddRoutes(_ drop: Droplet) {
@@ -54,7 +56,25 @@ final class BaseController {
             return user
             
         }
+        group.get("aphla") { req in
+            guard  let alpha = req.data["alpha"]?.string  else {
+                throw Abort.badRequest
+            }
+          try  alpha.validated(by: OnlyAlphanumeric())
+           
+            return ""
+        }
     }
     
   
+}
+
+class Match: Validator {
+    typealias Input = String
+    
+    func validate(_ input: String) throws {
+        
+    }
+    
+
 }

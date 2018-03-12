@@ -14,20 +14,24 @@ final class Event: Model {
     var title: String
     var content: String
     var mindTime: String
+    var tileUserId: String
     
     struct Keys {
         static let id = "id"
         static let title = "title"
         static let content = "content"
         static let mindTime = "mindTime"
+        static let tileUserId = "tileUserId"
     }
     
     init(title: String,
          content: String,
-         mindTime: String) {
+         mindTime: String,
+         tileUserId: String) {
         self.title = title
         self.content = content
         self.mindTime = mindTime
+        self.tileUserId = tileUserId
     }
     
     
@@ -35,6 +39,7 @@ final class Event: Model {
         title = try row.get(Event.Keys.title)
         content = try row.get(Event.Keys.content)
         mindTime = try row.get(Event.Keys.mindTime)
+        tileUserId = try row.get(Event.Keys.tileUserId)
     }
     
     func makeRow() throws -> Row {
@@ -42,6 +47,7 @@ final class Event: Model {
         try row.set(Event.Keys.title, title)
         try row.set(Event.Keys.content, content)
         try row.set(Event.Keys.mindTime, mindTime)
+             try row.set(Event.Keys.tileUserId, tileUserId)
         return row
     }
 }
@@ -53,6 +59,7 @@ extension Event: Preparation {
             builder.string(Event.Keys.title)
             builder.string(Event.Keys.content)
             builder.string(Event.Keys.mindTime)
+            builder.parent(User.self, optional: false, unique: true, foreignIdKey: Event.Keys.tileUserId)
         }
     }
     
@@ -65,7 +72,8 @@ extension Event: JSONConvertible {
     convenience init(json: JSON) throws {
         self.init(title: try json.get(Event.Keys.title),
                   content: try json.get(Event.Keys.content),
-                  mindTime:  try json.get(Event.Keys.mindTime))
+                  mindTime:  try json.get(Event.Keys.mindTime),
+                  tileUserId:  try json.get(Event.Keys.tileUserId))
     }
     
     func makeJSON() throws -> JSON {
@@ -74,6 +82,7 @@ extension Event: JSONConvertible {
         try json.set(Event.Keys.content, content)
         try json.set(Event.Keys.title, title)
         try json.set(Event.Keys.mindTime, mindTime)
+          try json.set(Event.Keys.tileUserId, tileUserId)
         return json
     }
 }
@@ -91,6 +100,9 @@ extension Event: Updateable {
             },
             UpdateableKey(Event.Keys.mindTime, String.self) { event, mindTime in
                 event.mindTime = mindTime
+            },
+            UpdateableKey(Event.Keys.tileUserId, String.self) { event, tileUser in
+                event.tileUserId = tileUser
             }
         ]
     }
