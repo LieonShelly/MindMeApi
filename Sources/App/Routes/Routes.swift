@@ -27,12 +27,12 @@ extension Droplet {
         
         get("description") { req in return req.description }
         
-        get("users") { req in
-            return try JSON(node: User.all().makeNode(in: nil))
-            
-        }
+
     
         try resource("posts", PostController.self)
         try resource("event", EventController.self)
+        
+        let basic = BaseController()
+        basic.adddRoutes(self)
     }
 }
