@@ -20,6 +20,9 @@ final class  UserController {
    fileprivate func login(_ request: Request)  throws -> ResponseRepresentable {
         let currentUser = try request.user()
         let email = currentUser.email
+        let password = currentUser.password
+        try  email.validated(by: UserNameValidator())
+        try  password.validated(by: PasswordValidator())
         if let dataBaseUser = try User.makeQuery().filter(User.Keys.email, email).all().first {
             return try JSON(node: dataBaseUser.makeNode(in: nil))
         } else {
@@ -30,6 +33,9 @@ final class  UserController {
     fileprivate func register(_ request: Request) throws -> ResponseRepresentable {
         let currentUser = try request.user()
         let email = currentUser.email
+        let password = currentUser.password
+        try  email.validated(by: UserNameValidator())
+        try  password.validated(by: PasswordValidator())
         if let _ = try User.makeQuery().filter(User.Keys.email, email).all().first {
            return "Exist \(email)"
         } else {
