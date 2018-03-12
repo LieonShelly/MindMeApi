@@ -25,6 +25,11 @@ final class BaseController {
             }
         }
         
+        group.get("delete_all_user") { req in
+            try User.makeQuery().delete()
+            return "deleted ALL User"
+            
+        }
          group.get("all") { req in
             return try JSON(node: User.all().makeNode(in: nil))
             

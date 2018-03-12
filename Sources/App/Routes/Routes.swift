@@ -34,5 +34,8 @@ extension Droplet {
         
         let basic = BaseController()
         basic.adddRoutes(self)
+        
+        let user = UserController()
+        user.addRoutes(self)
     }
 }
