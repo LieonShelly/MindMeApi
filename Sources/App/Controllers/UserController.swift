@@ -15,6 +15,9 @@ final class  UserController {
         let userGroup = drop.grouped("user")
         userGroup.post("login", handler: login)
         userGroup.post("register", handler: register)
+        userGroup.get(handler: allUser)
+        userGroup.get(User.parameter, handler: getUser)
+        userGroup.get(User.parameter, "events", handler: getUserEvents)
     }
     
    fileprivate func login(_ request: Request)  throws -> ResponseRepresentable {
@@ -42,6 +45,21 @@ final class  UserController {
            try currentUser.save()
           return currentUser
         }
+    }
+    
+    fileprivate func allUser(_ request: Request) throws -> ResponseRepresentable {
+        let users = try User.all()
+        return try users.makeJSON()
+    }
+    
+    fileprivate func getUser(_ request: Request) throws -> ResponseRepresentable {
+        let user = try request.parameters.next(User.self)
+        return user
+    }
+    
+    fileprivate func getUserEvents(_ request: Request) throws -> ResponseRepresentable  {
+        let user = try request.parameters.next(User.self)
+        return try user.events.all().makeJSON()
     }
 }
 

@@ -10,31 +10,14 @@ extension Droplet {
             try json.set("hello", "world")
             return json
         }
-
-        get("plaintext") { req in
-            return "Hello, world!"
-        }
-        
-        post("plaintext") { req in
-            return "Hello, world!"
-        }
-
-        // response to requests to /info domain
-        // with a description of the request
-        get("info") { req in
-            return req.description
-        }
         
         get("description") { req in return req.description }
-        
-
-    
+ 
         try resource("posts", PostController.self)
-        try resource("event", EventController.self)
-        
         let basic = BaseController()
         basic.adddRoutes(self)
-        
+        let event = EventController()
+        event.addRoutes(self)
         let user = UserController()
         user.addRoutes(self)
     }

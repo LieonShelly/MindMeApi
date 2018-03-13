@@ -14,24 +14,24 @@ final class Event: Model {
     var title: String
     var content: String
     var mindTime: String
-    var tileUserId: String
+    var userId: Identifier?
     
     struct Keys {
         static let id = "id"
         static let title = "title"
         static let content = "content"
         static let mindTime = "mindTime"
-        static let tileUserId = "tileUserId"
+        static let tileUserId = "user_id"
     }
     
     init(title: String,
          content: String,
          mindTime: String,
-         tileUserId: String) {
+         user: User) {
         self.title = title
         self.content = content
         self.mindTime = mindTime
-        self.tileUserId = tileUserId
+        self.userId = user.id
     }
     
     
@@ -39,7 +39,7 @@ final class Event: Model {
         title = try row.get(Event.Keys.title)
         content = try row.get(Event.Keys.content)
         mindTime = try row.get(Event.Keys.mindTime)
-        tileUserId = try row.get(Event.Keys.tileUserId)
+        userId = try row.get(User.foreignIdKey)
     }
     
     func makeRow() throws -> Row {
@@ -47,7 +47,7 @@ final class Event: Model {
         try row.set(Event.Keys.title, title)
         try row.set(Event.Keys.content, content)
         try row.set(Event.Keys.mindTime, mindTime)
-             try row.set(Event.Keys.tileUserId, tileUserId)
+             try row.set(User.foreignIdKey, userId)
         return row
     }
 }
@@ -59,7 +59,7 @@ extension Event: Preparation {
             builder.string(Event.Keys.title)
             builder.string(Event.Keys.content)
             builder.string(Event.Keys.mindTime)
-            builder.parent(User.self, optional: false, unique: true, foreignIdKey: Event.Keys.tileUserId)
+            builder.parent(User.self)
         }
     }
     
@@ -70,10 +70,14 @@ extension Event: Preparation {
 
 extension Event: JSONConvertible {
     convenience init(json: JSON) throws {
+        let userId: Identifier = try json.get("user_id")
+        guard let user = try User.find(userId) else {
+            throw Abort.badRequest
+        }
         self.init(title: try json.get(Event.Keys.title),
                   content: try json.get(Event.Keys.content),
                   mindTime:  try json.get(Event.Keys.mindTime),
-                  tileUserId:  try json.get(Event.Keys.tileUserId))
+                  user: user)
     }
     
     func makeJSON() throws -> JSON {
@@ -82,7 +86,7 @@ extension Event: JSONConvertible {
         try json.set(Event.Keys.content, content)
         try json.set(Event.Keys.title, title)
         try json.set(Event.Keys.mindTime, mindTime)
-          try json.set(Event.Keys.tileUserId, tileUserId)
+          try json.set(Event.Keys.tileUserId, userId)
         return json
     }
 }
@@ -101,10 +105,16 @@ extension Event: Updateable {
             UpdateableKey(Event.Keys.mindTime, String.self) { event, mindTime in
                 event.mindTime = mindTime
             },
-            UpdateableKey(Event.Keys.tileUserId, String.self) { event, tileUser in
-                event.tileUserId = tileUser
+            UpdateableKey(Event.Keys.tileUserId, Identifier.self) { event, tileUser in
+                event.userId = tileUser
             }
         ]
+    }
+}
+
+extension Event {
+    var user: Parent<Event, User> {
+        return parent(id: userId)
     }
 }
 

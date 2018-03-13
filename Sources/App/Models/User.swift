@@ -89,3 +89,9 @@ extension User: Preparation {
       try  database.delete(self)
     }
 }
+
+extension User {
+    var events: Children<User, Event> {
+        return children()
+    }
+}

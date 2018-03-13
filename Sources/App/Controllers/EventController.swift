@@ -9,7 +9,13 @@ import Foundation
 import Vapor
 import HTTP
 
-final class EventController: ResourceRepresentable {
+final class EventController  {
+    func addRoutes(_ drop: Droplet) {
+         let eventGroup = drop.grouped("event")
+        eventGroup.get("", handler: index)
+        eventGroup.post("", handler: store)
+        eventGroup.get(Event.parameter, "user", handler: getEventUser)
+    }
     
     func index(_ req: Request) throws -> ResponseRepresentable {
         return try Event.all().makeJSON()
@@ -61,6 +67,14 @@ final class EventController: ResourceRepresentable {
             destroy: delete,
             clear: clear
         )
+    }
+    
+    fileprivate func getEventUser(_ req: Request) throws -> ResponseRepresentable {
+        let event = try req.parameters.next(Event.self)
+        guard let user = try event.user.get() else {
+            throw Abort.notFound
+        }
+        return user
     }
 }
 
