@@ -11,10 +11,11 @@ import HTTP
 
 final class EventController  {
     func addRoutes(_ drop: Droplet) {
-         let eventGroup = drop.grouped("event")
+        let eventGroup = drop.grouped("event")
         eventGroup.get("", handler: index)
         eventGroup.post("", handler: store)
         eventGroup.get(Event.parameter, "user", handler: getEventUser)
+          eventGroup.get(Event.parameter, "categories", handler: getEventCategories)
     }
     
     func index(_ req: Request) throws -> ResponseRepresentable {
@@ -24,6 +25,13 @@ final class EventController  {
     func store(_ req: Request) throws -> ResponseRepresentable {
         let event = try req.event()
         try event.save()
+        if let json = req.json, let categories = json["categories"]?.array {
+            for categoryJSON in categories {
+                if let category = try Category.find(categoryJSON["id"]) {
+                    try event.categories.add(category )
+                }
+            }
+        }
         return event
     }
     
@@ -75,6 +83,11 @@ final class EventController  {
             throw Abort.notFound
         }
         return user
+    }
+    
+    fileprivate func getEventCategories(_ req: Request) throws -> ResponseRepresentable {
+        let event = try req.parameters.next(Event.self)
+        return try event.categories.all().makeJSON()
     }
 }
 

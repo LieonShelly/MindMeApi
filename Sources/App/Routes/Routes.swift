@@ -20,5 +20,7 @@ extension Droplet {
         event.addRoutes(self)
         let user = UserController()
         user.addRoutes(self)
+        let category = CategoryController()
+        category.addRoutes(to: self)
     }
 }

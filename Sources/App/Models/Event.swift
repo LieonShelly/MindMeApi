@@ -116,6 +116,10 @@ extension Event {
     var user: Parent<Event, User> {
         return parent(id: userId)
     }
+    
+    var categories: Siblings<Event, Category, Pivot<Event, Category>> {
+        return siblings()
+    }
 }
 
 

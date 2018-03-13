@@ -41,6 +41,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		CD1A7476205779E400BDA339 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A7475205779E400BDA339 /* Category.swift */; };
+		CD1A747820577A7100BDA339 /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1A747720577A7100BDA339 /* CategoryController.swift */; };
 		OBJ_1004 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_519 /* Package.swift */; };
 		OBJ_1010 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_658 /* Package.swift */; };
 		OBJ_1016 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_673 /* Package.swift */; };
@@ -5211,6 +5213,8 @@
 		"AuthProvider::AuthProvider::Product" /* AuthProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"BCrypt::BCrypt::Product" /* BCrypt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BCrypt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bits::Bits::Product" /* Bits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD1A7475205779E400BDA339 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		CD1A747720577A7100BDA339 /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		"Console::Console::Product" /* Console.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Console.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Core::Core::Product" /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Core::libc::Product" /* libc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6922,6 +6926,7 @@
 				OBJ_16 /* Post.swift */,
 				OBJ_17 /* Token.swift */,
 				OBJ_18 /* User.swift */,
+				CD1A7475205779E400BDA339 /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -7982,7 +7987,7 @@
 			path = Number;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -7993,7 +7998,6 @@
 				OBJ_36 /* Dependencies */,
 				OBJ_863 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_501 /* StructuredData */ = {
@@ -9089,6 +9093,7 @@
 				OBJ_11 /* EventController.swift */,
 				OBJ_12 /* PostController.swift */,
 				OBJ_13 /* UserController.swift */,
+				CD1A747720577A7100BDA339 /* CategoryController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -10788,7 +10793,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_863 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -10993,8 +10998,10 @@
 				OBJ_1308 /* Routes.swift in Sources */,
 				OBJ_1309 /* Config+Setup.swift in Sources */,
 				OBJ_1310 /* Droplet+Setup.swift in Sources */,
+				CD1A747820577A7100BDA339 /* CategoryController.swift in Sources */,
 				OBJ_1311 /* PasswordValidator.swift in Sources */,
 				OBJ_1312 /* UserNameValidator.swift in Sources */,
+				CD1A7476205779E400BDA339 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

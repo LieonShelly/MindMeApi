@@ -27,6 +27,7 @@ extension Config {
         preparations.append(Post.self)
         preparations.append(User.self)
         preparations.append(Event.self)
-
+        preparations.append(Category.self)
+        preparations.append(Pivot<Event, Category>.self)
     }
 }
