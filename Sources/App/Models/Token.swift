@@ -11,6 +11,7 @@ import HTTP
 import FluentProvider
 
 //final class Token: Model {
+//    let storage: Storage = Storage()
 //    let token: String
 //    let userId: Identifier
 //    
@@ -25,5 +26,17 @@ import FluentProvider
 //        static let user = "user"
 //    }
 //    
+//    init(token: String, userId: Identifier) {
+//        self.token = token
+//        self.userId = userId;
+//    }
+//    
+//    init(row: Row) throws {
+//        
+//    }
+//    
+//    func makeRow() throws -> Row {
+//        
+//    }
 //}
 

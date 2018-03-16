@@ -14,6 +14,8 @@ extension Droplet {
         get("description") { req in return req.description }
  
         try resource("posts", PostController.self)
+        let web = WebPageController()
+        web.addRoutes(self)
         let basic = BaseController()
         basic.adddRoutes(self)
         let event = EventController()
@@ -22,5 +24,6 @@ extension Droplet {
         user.addRoutes(self)
         let category = CategoryController()
         category.addRoutes(to: self)
+        
     }
 }

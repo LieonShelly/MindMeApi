@@ -59,6 +59,7 @@ extension Event: Preparation {
             builder.string(Event.Keys.title)
             builder.string(Event.Keys.content)
             builder.string(Event.Keys.mindTime)
+          // 设置parent class
             builder.parent(User.self)
         }
     }

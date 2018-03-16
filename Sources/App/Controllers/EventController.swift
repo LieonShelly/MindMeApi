@@ -15,7 +15,7 @@ final class EventController  {
         eventGroup.get("", handler: index)
         eventGroup.post("", handler: store)
         eventGroup.get(Event.parameter, "user", handler: getEventUser)
-          eventGroup.get(Event.parameter, "categories", handler: getEventCategories)
+        eventGroup.get(Event.parameter, "categories", handler: getEventCategories)
     }
     
     func index(_ req: Request) throws -> ResponseRepresentable {
