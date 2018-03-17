@@ -29,5 +29,6 @@ extension Config {
         preparations.append(Event.self)
         preparations.append(Category.self)
         preparations.append(Pivot<Event, Category>.self)
+         preparations.append(Token.self)
     }
 }

@@ -24,6 +24,8 @@ extension Droplet {
         user.addRoutes(self)
         let category = CategoryController()
         category.addRoutes(to: self)
+        let chat = ChatController()
+        chat.addRoutes(self)
         
     }
 }

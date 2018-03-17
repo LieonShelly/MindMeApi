@@ -15,7 +15,6 @@ final class WebPageController {
         webPageGroup.get { request -> ResponseRepresentable in
             return try drop.view.make("MindMe/index.html")
         }
-        
     }
     
     

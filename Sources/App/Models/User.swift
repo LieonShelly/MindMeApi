@@ -45,7 +45,6 @@ final class User: Model, NodeInitializable{
         email = try node.get(User.Keys.email)
         password = try node.get(User.Keys.password)
     }
-
 }
 
 extension User: JSONConvertible {

@@ -47,7 +47,7 @@ final class Event: Model {
         try row.set(Event.Keys.title, title)
         try row.set(Event.Keys.content, content)
         try row.set(Event.Keys.mindTime, mindTime)
-             try row.set(User.foreignIdKey, userId)
+        try row.set(User.foreignIdKey, userId)
         return row
     }
 }

@@ -5,26 +5,59 @@
 //  Created by lieon on 2018/3/15.
 //
 
-import Foundation
 import Vapor
 import HTTP
+import Foundation
+import PromiseKit
 import Crypto
 
 final class ChatController {
+    var drop:Droplet?
     func addRoutes(_ drop: Droplet) {
-           let chatGroup = drop.grouped("rc")
+         let chatGroup = drop.grouped("rc")
+        chatGroup.post("token") { req -> ResponseRepresentable in
+            guard let param = req.json,
+                let userId = param["userId"]?.int else {
+                return "Param Error"
+            }
+            do {
+               let existToken = try Token.makeQuery().filter(Token.Keys.userId, userId)
+               try existToken.delete()
+            } catch {
+                return "----"
+            }
+            let nonce: String =  String(arc4random())
+            let appSecret = Common.RongCloud.appSecret
+            let timStamp = String(Int(Date().timeIntervalSince1970))
+            let str = (appSecret + nonce + timStamp)
+            let sha1 = CryptoHasher(hash: .sha1, encoding: .hex)
+            let signature = try sha1.make(str)
+            let finalStr = String(bytes: signature)
+            let urlStr = Common.RongCloud.getTokenUrl
+            let header: [HeaderKey: String] = [
+                    HeaderKey("App-Key"):  Common.RongCloud.appkey,
+                    HeaderKey("Nonce"): nonce,
+                    HeaderKey("Timestamp"): timStamp,
+                    HeaderKey("Signature"): finalStr,
+                    HeaderKey("Content-Type"): "application/x-www-form-urlencoded",
+                   ]
+            let req = Request(method: .post, uri: urlStr)
+            req.formURLEncoded = try Node(node: param)
+            req.headers = header
+            let response =  try drop.client.respond(to: req)
+            guard let resjson =  response.json,
+                let token = resjson["token"]?.string ,
+               let user = try User.find(userId)else {
+                return "Prase Error"
+            }
+            let tokenEntity = Token(token: token, user: user)
+            try tokenEntity.save()
+            return try JSON(node: [
+                    "token": token
+                ])
+        }
+        
     }
-    
-    fileprivate func getToken(_ request: Request)  throws -> ResponseRepresentable {
-          let nonce: String =  String(arc4random())
-          let appSecret = ""// Common.RongCloud.appSecret
-          let timStamp = String(NSDate().timeIntervalSince1970)
-          var sha1 =  nonce + appSecret + timStamp
-         let sha = Sha1
-        let hash = CryptoHasher
-    }
+
 }
 
-extension ChatController {
-   
-}
