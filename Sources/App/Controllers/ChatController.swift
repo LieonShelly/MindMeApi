@@ -29,7 +29,7 @@ final class ChatController {
             } catch {
                 return "----"
             }
-            let nonce: String =  String(arc4random())
+            let nonce: String = String(try Random().makeUInt32())
             let appSecret = Common.RongCloud.appSecret
             let timStamp = String(Int(Date().timeIntervalSince1970))
             let str = (appSecret + nonce + timStamp)
