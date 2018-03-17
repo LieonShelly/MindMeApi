@@ -15,6 +15,9 @@ final class ChatController {
     var drop:Droplet?
     func addRoutes(_ drop: Droplet) {
          let chatGroup = drop.grouped("rc")
+        chatGroup.get("token") { (req) -> ResponseRepresentable in
+            return "getting token"
+        }
         chatGroup.post("token") { req -> ResponseRepresentable in
             guard let param = req.json,
                 let userId = param["userId"]?.int else {
