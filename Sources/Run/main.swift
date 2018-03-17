@@ -1,6 +1,5 @@
 import App
 import HTTP
-import Alamofire
 import Foundation
 import PromiseKit
 
