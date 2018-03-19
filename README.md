@@ -21,3 +21,12 @@
         <img src="http://img.shields.io/badge/swift-3.1-brightgreen.svg" alt="Swift 3.1">
     </a>
 </center>
+#数据格式
+{
+  "code": 0,
+  "desc": "successs",
+  "token": "a2312312312=====",
+  "data": ""
+ }
+
+

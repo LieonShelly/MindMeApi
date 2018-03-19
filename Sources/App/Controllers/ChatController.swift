@@ -8,7 +8,6 @@
 import Vapor
 import HTTP
 import Foundation
-import PromiseKit
 import Crypto
 
 final class ChatController {
@@ -55,9 +54,9 @@ final class ChatController {
             }
             let tokenEntity = Token(token: token, user: user)
             try tokenEntity.save()
-            return try JSON(node: [
-                    "token": token
-                ])
+            let responseData = ["rc_token": token]
+            let responseModel = ResponseModel(code: 0, desc: "success", token: nil, data: try responseData.makeNode(in: nil))
+            return try JSON(node: responseModel.makeNode(in: nil))
         }
         
     }
