@@ -18,9 +18,11 @@ final class ChatController {
             return "getting token"
         }
         chatGroup.post("token") { req -> ResponseRepresentable in
+            let responseModel = ResponseModel(code: 0, desc: "success")
             guard let param = req.json,
                 let userId = param["userId"]?.int else {
-                return "Param Error"
+                    responseModel.desc = "Param Error"
+                    return try JSON(node: responseModel.makeNode(in: nil))
             }
             do {
                let existToken = try Token.makeQuery().filter(Token.Keys.userId, userId)
@@ -50,12 +52,13 @@ final class ChatController {
             guard let resjson =  response.json,
                 let token = resjson["token"]?.string ,
                let user = try User.find(userId)else {
-                return "Prase Error"
+                responseModel.desc = "parase Error"
+                return try JSON(node: responseModel.makeNode(in: nil))
             }
             let tokenEntity = Token(token: token, user: user)
             try tokenEntity.save()
             let responseData = ["rc_token": token]
-            let responseModel = ResponseModel(code: 0, desc: "success", token: nil, data: try responseData.makeNode(in: nil))
+            responseModel.data = try responseData.makeNode(in: nil)
             return try JSON(node: responseModel.makeNode(in: nil))
         }
         
