@@ -14,11 +14,12 @@ let package = Package(
         .package(url: "https://github.com/vapor-community/postgresql-provider.git", .upToNextMajor(from: "2.1.0")),
         .package(url: "https://github.com/vapor/auth-provider.git", .upToNextMajor(from: "1.0.0")),
         .package(url: "https://github.com/vapor/validation-provider.git", .upToNextMajor(from: "1.0.0")),
+        .package(url: "https://github.com/vapor/jwt-provider.git", .upToNextMajor(from: "1.0.0"))
     ],
     targets: [
         .target(
             name: "App",
-            dependencies: ["Vapor", "FluentProvider", "PostgreSQLProvider", "AuthProvider", "ValidationProvider"],
+            dependencies: ["Vapor", "FluentProvider", "PostgreSQLProvider", "AuthProvider", "ValidationProvider", "JWTProvider"],
             exclude: ["Config", "Public", "Resources"]
         ),
         .target(name: "Run", dependencies: ["App"]),

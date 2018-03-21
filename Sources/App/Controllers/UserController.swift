@@ -9,9 +9,15 @@ import Vapor
 import HTTP
 import VaporValidation
 import Crypto
+import JWTProvider
+import JWT
+import Foundation
 
 final class  UserController {
+    var drop: Droplet?
+    
     func addRoutes(_ drop: Droplet) {
+        self.drop = drop
         let userGroup = drop.grouped("user")
         userGroup.post("login", handler: login)
         userGroup.post("register", handler: register)
@@ -27,7 +33,10 @@ final class  UserController {
         try  email.validated(by: UserNameValidator())
         try  password.validated(by: PasswordValidator())
         if let dataBaseUser = try User.makeQuery().filter(User.Keys.email, email).all().first {
-            return try JSON(node: dataBaseUser.makeNode(in: nil))
+            return try JSON(node: [
+                        "token": self.drop?.createToken(email) ?? "",
+                        "user":  dataBaseUser.makeNode(in: nil)
+                    ])
         } else {
             return "not Exist \(email)"
         }
@@ -49,6 +58,8 @@ final class  UserController {
     
     fileprivate func allUser(_ request: Request) throws -> ResponseRepresentable {
         let users = try User.all()
+        let token = request.headers[HeaderKey.init("token")]
+        try self.drop?.validateToken(token!)
         return try users.makeJSON()
     }
     

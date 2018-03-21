@@ -10,12 +10,12 @@ import Vapor
 import Node
 
 class ResponseModel: NodeInitializable {
-    var code: Int = 0
+    var code: String = "0000"
     var data: Node?
     var desc: String
     var token: String?
     
-    init(code: Int,
+    init(code: String,
          desc: String,
          token: String? = nil,
          data: Node = nil) {
@@ -37,9 +37,9 @@ class ResponseModel: NodeInitializable {
 extension ResponseModel: NodeRepresentable {
     func makeNode(in context: Context?) throws -> Node {
         return try Node(node: [
-            "code": code,
-            "data": data  ?? [String: Any](),
+            "data": data  ?? Node(node:[String: Any]()),
             "desc": desc,
+            "code": code,
             "token": token ?? ""
             ])
     }
