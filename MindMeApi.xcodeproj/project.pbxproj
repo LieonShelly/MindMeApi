@@ -41,6 +41,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		CD351947207BC01400D8A162 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD351946207BC01400D8A162 /* UserInfo.swift */; };
+		CD351949207BC05C00D8A162 /* Aggrement.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD351948207BC05C00D8A162 /* Aggrement.swift */; };
+		CD35194B207BC48C00D8A162 /* DeductionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35194A207BC48C00D8A162 /* DeductionHistory.swift */; };
+		CD35194D207BC5A500D8A162 /* AggrementDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD35194C207BC5A500D8A162 /* AggrementDetail.swift */; };
 		OBJ_1004 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_134 /* Package.swift */; };
 		OBJ_1010 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_147 /* Package.swift */; };
 		OBJ_1016 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_167 /* Package.swift */; };
@@ -5665,6 +5669,10 @@
 		"AuthProvider::AuthProvider::Product" /* AuthProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"BCrypt::BCrypt::Product" /* BCrypt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BCrypt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Bits::Bits::Product" /* Bits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Bits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD351946207BC01400D8A162 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		CD351948207BC05C00D8A162 /* Aggrement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aggrement.swift; sourceTree = "<group>"; };
+		CD35194A207BC48C00D8A162 /* DeductionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeductionHistory.swift; sourceTree = "<group>"; };
+		CD35194C207BC5A500D8A162 /* AggrementDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggrementDetail.swift; sourceTree = "<group>"; };
 		"Console::Console::Product" /* Console.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Console.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Core::Core::Product" /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Core::libc::Product" /* libc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = libc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -7569,6 +7577,10 @@
 				OBJ_21 /* ResponseModel.swift */,
 				OBJ_22 /* Token.swift */,
 				OBJ_23 /* User.swift */,
+				CD351946207BC01400D8A162 /* UserInfo.swift */,
+				CD351948207BC05C00D8A162 /* Aggrement.swift */,
+				CD35194A207BC48C00D8A162 /* DeductionHistory.swift */,
+				CD35194C207BC5A500D8A162 /* AggrementDetail.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -8545,7 +8557,7 @@
 			path = ".build/checkouts/routing.git-5366657101075133678/Sources/Routing";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -8557,7 +8569,6 @@
 				OBJ_45 /* Dependencies */,
 				OBJ_927 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_507 /* Multipart 2.1.1 */ = {
@@ -11604,7 +11615,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_927 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -11922,9 +11933,13 @@
 				OBJ_1401 /* Routes.swift in Sources */,
 				OBJ_1402 /* Config+Setup.swift in Sources */,
 				OBJ_1403 /* Droplet+Setup.swift in Sources */,
+				CD351949207BC05C00D8A162 /* Aggrement.swift in Sources */,
 				OBJ_1404 /* PasswordValidator.swift in Sources */,
 				OBJ_1405 /* UserNameValidator.swift in Sources */,
 				OBJ_1406 /* Common.swift in Sources */,
+				CD35194B207BC48C00D8A162 /* DeductionHistory.swift in Sources */,
+				CD35194D207BC5A500D8A162 /* AggrementDetail.swift in Sources */,
+				CD351947207BC01400D8A162 /* UserInfo.swift in Sources */,
 				OBJ_1407 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
